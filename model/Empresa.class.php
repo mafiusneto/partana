@@ -1,6 +1,6 @@
 <?php
 
-class Empresa implements Crud {
+class Empresa {
     private $cnpj;
     private $rzsocial;
     private $fantasia;
@@ -28,9 +28,9 @@ class Empresa implements Crud {
     public function inserir($cnpj, $rzsocial, $fantasia) {
         
         if(($cnpj != NULL) AND ($rzsocial != NULL) AND ($fantasia != NULL)) {
-            $sql = "INSERT INTO `empresa`(`cnpj`, `rzsocial`, `fantasia`)VALUES ('".$cnpj."','".$rzsocial."','".$fantasia."')";
+            $sql = "INSERT INTO `empresa`(`cnpj`, `rzsocial`, `fantasia`)VALUES ('$cnpj','$rzsocial','$fantasia')";
             $mysqli = new mysqli('localhost', 'root', '', 'partana');
-            $query = $mysqli->query($sql);
+            $mysqli->query($sql);
         }  
     }
 
