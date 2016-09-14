@@ -1,0 +1,72 @@
+#content {
+  width: 100%;
+  height: auto;
+}
+#content .separator:nth-child(1) {
+  border-right: 1px #515151 solid;
+}
+#content .separator:nth-child(2) {
+  border-right: 1px #515151 solid;
+}
+#content .separator:nth-child(3) {
+  border-right: 1px #515151 solid;
+}
+#content .separator {
+  width: 350px;
+  height: 200px;
+  float: left;
+  padding: 5px 5px 0px 5px;
+}
+#content .separator h1 {
+  font-size: 14px;
+  font-family: "Trebushet MS", arial;
+  font-weight: bold;
+  color: #515151;
+}
+#content .separator label {
+  font-size: 12px;
+  font-family: "Trebushet MS", arial;
+  font-weight: bold;
+  color: #515151;
+}
+#content .separator select {
+  display: block;
+  width: 208px;
+  height: 28px;
+  border-radius: 3px;
+  margin-top: 3px;
+  border: 1px solid #515151;
+  padding: 0px 3px 0px 3px;
+}
+#content .separator input {
+  display: block;
+  width: 200px;
+  height: 25px;
+  border-radius: 3px;
+  margin-top: 3px;
+  border: 1px solid #515151;
+  padding: 0px 3px 0px 3px;
+}
+#content .separator input:last-child {
+  width: 80px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#3a68a0), to(#70a8ed)) repeat-X;
+  color: #FFF;
+  cursor: pointer;
+}
+#content .separator input:last-child:hover {
+  background: -webkit-gradient(linear, left top, left bottom, from(#70a8ed), to(#3a68a0)) repeat-X;
+}
+#content .separator table {
+  margin-top: 5px;
+  max-width: 340px;
+}
+#content .separator table tr:first-child {
+  font-weight: bold;
+}
+#content .separator table tr td {
+  padding: 2px;
+  border: 1px solid #000;
+  border-radius: 3px;
+  font-family: "Trebushet MS", arial;
+  font-size: 13px;
+}

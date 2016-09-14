@@ -11,16 +11,21 @@ class Login {
         $pass = strip_tags($pass);//tira tags html e php
         $pass = addslashes($pass);//Adiciona barras invertidas a uma string
         
-        $sql = " SELECT * FROM usuarios WHERE nome = $user AND senha = $pass ";
+        $sql = " SELECT * FROM usuarios WHERE nome = '".$user."' AND senha = '".$pass."' ";
         $mysqli = new mysqli('localhost', 'root', '', 'partana');
         $query = $mysqli->query($sql);
 
         $row = $query->fetch_array(MYSQLI_NUM);
-
+        
         if((count($row)) < 1 ) {
-            echo "Usuário não autenticado.";
+            echo "<script>alert('Usuário não autenticado');</script>";
         } else {
-            echo "Usuário autenticado.";
+            session_start("access");
+            $_SESSION['cod']     = $row['0'];
+            $_SESSION['nome']   = $row['1'];
+            $_SESSION['senha']   = $row['2'];
+            $_SESSION['status'] = $row['3'];
+            print "<script> window.location='index.php';</script>";
         }
         
     }

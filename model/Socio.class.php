@@ -5,9 +5,12 @@ class Socio {
     private $cpf;
     private $nome;
     private $email;
-    
+    private $test;
 
     //Getters and Setters
+    public function getTest(){
+        return $this->test;
+    }
     public function getCpf(){
         return $this->cpf;
     }
@@ -56,28 +59,36 @@ class Socio {
             if((count($row)) < 1 ) {
                 echo "CPF não encontrado";
             } else {
-                for($i = 0; $i<(count($row)); $i++){
-                    echo $row[$i]."\n";
-                }
+                $this->test = true;
+                $this->cpf = $row[0];
+                $this->nome = $row[1];
+                $this->email = $row[2];
             }
        }
     }
     
-    //Método Lista Todos
-    /*public function listar(){
-        $sql = " SELECT * FROM socio ";
-        $mysqli = new mysqli('localhost', 'root', '', 'partana');
-        $query = $mysqli->query($sql);
+    //Método Listagem para Atualização
+    public function lista($cpf){
+        if($cpf != NULL) {
+            $sql = " SELECT * FROM socio WHERE cpf = ".$cpf." ";
+            $mysqli = new mysqli('localhost', 'root', '', 'partana');
+            $query = $mysqli->query($sql);
+            
+            $row = $query->fetch_array(MYSQLI_NUM);
 
-        $result = $query->fetch_array(MYSQLI_NUM);
-        
-        while($rst = $result->fetch_assoc()){
-            print_r ($rst);
-        }
-    }*/
+            if((count($row)) < 1 ) {
+                echo "CPF não encontrado";
+            } else {
+                $this->test = true;
+                $this->cpf      = $row[0];
+                $this->nome     = $row[1];
+                $this->email    = $row[2];
+            }
+       }
+    }
     
-    //Método Alterar
-    public function alterar($cpf, $nome, $email) {
+    //Método Atualização
+    public function alterar($cpf, $nome, $email) {        
         if(($cpf != NULL) AND ($nome != NULL) AND ($email != NULL)) {
             $sql = " UPDATE `socio` SET `nome` = '".$nome."', `email` = '".$email."' WHERE `cpf` = '".$cpf."' ";
             $mysqli = new mysqli('localhost', 'root', '', 'partana');
