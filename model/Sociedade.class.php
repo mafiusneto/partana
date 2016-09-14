@@ -69,8 +69,12 @@ class Sociedade {
 
         $row = $query->fetch_all(MYSQLI_NUM)or die(mysqli_error($mysqli));
         echo "<pre>";
-        print_r ($row[0]);
+        print_r (count($row));
         echo "</pre>";
+        $x = (count($row));
+        for($i = 0; $i < $x; $i++){
+            echo $row[$i][0];
+        }
        
     }
     
