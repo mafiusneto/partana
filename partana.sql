@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 13-Set-2016 às 14:54
+-- Generation Time: 15-Set-2016 às 08:42
 -- Versão do servidor: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -33,13 +33,6 @@ CREATE TABLE IF NOT EXISTS `empresa` (
   PRIMARY KEY (`cnpj`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Extraindo dados da tabela `empresa`
---
-
-INSERT INTO `empresa` (`cnpj`, `rzsocial`, `fantasia`) VALUES
-('11426166000190', 'IMLima 11426166000190', 'Host PB');
-
 -- --------------------------------------------------------
 
 --
@@ -47,19 +40,14 @@ INSERT INTO `empresa` (`cnpj`, `rzsocial`, `fantasia`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `participacao` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `socio` varchar(11) NOT NULL,
   `empresa` varchar(14) NOT NULL,
   `percentual` double NOT NULL,
+  PRIMARY KEY (`id`),
   KEY `socio` (`socio`),
   KEY `empresa` (`empresa`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `participacao`
---
-
-INSERT INTO `participacao` (`socio`, `empresa`, `percentual`) VALUES
-('08684540441', '11426166000190', 50);
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 -- --------------------------------------------------------
 
@@ -74,13 +62,26 @@ CREATE TABLE IF NOT EXISTS `socio` (
   PRIMARY KEY (`cpf`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Extraindo dados da tabela `socio`
+-- Estrutura da tabela `usuarios`
 --
 
-INSERT INTO `socio` (`cpf`, `nome`, `email`) VALUES
-('08684540441', 'Edmarcos Lins', 'elmf_lins@hotmail.com'),
-('69170789487', 'SÃ´nia Maria', 'sonia@gmail.com');
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `cod` int(2) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(30) NOT NULL,
+  `senha` char(40) NOT NULL,
+  `status` int(1) NOT NULL,
+  PRIMARY KEY (`cod`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Extraindo dados da tabela `usuarios`
+--
+
+INSERT INTO `usuarios` (`cod`, `nome`, `senha`, `status`) VALUES
+(4, 'admin', '7c4a8d09ca3762af61e59520943dc26494f8941b', 0);
 
 --
 -- Constraints for dumped tables
