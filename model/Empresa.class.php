@@ -1,5 +1,6 @@
 <?php
-require_once 'connection.inc.php';
+
+require_once 'Conexao.class.php';
 
 class Empresa {
     private $cnpj;
@@ -35,7 +36,8 @@ class Empresa {
         
         if(($cnpj != NULL) AND ($rzsocial != NULL) AND ($fantasia != NULL)) {
             $sql = "INSERT INTO `empresa`(`cnpj`, `rzsocial`, `fantasia`)VALUES ('$cnpj','$rzsocial','$fantasia')";
-            $mysqli = new mysqli('localhost', 'root', '', 'partana');
+            $conn = new Conexao();
+            $mysqli = $conn->condb();
             $mysqli->query($sql) or die(mysqli_error($mysqli));
         }  
     }
@@ -44,7 +46,8 @@ class Empresa {
     public function buscar($cnpj){
         if($cnpj != NULL) {
             $sql = " SELECT * FROM empresa WHERE cnpj = $cnpj ";
-            $mysqli = new mysqli('localhost', 'root', '', 'partana');
+            $conn = new Conexao();
+            $mysqli = $conn->condb();
             $query = $mysqli->query($sql);
             
             $row = $query->fetch_array(MYSQLI_NUM);

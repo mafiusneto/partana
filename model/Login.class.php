@@ -1,4 +1,5 @@
 <?php
+require_once 'Conexao.class.php';
 
 class Login {
     
@@ -12,7 +13,8 @@ class Login {
         $pass = addslashes($pass);//Adiciona barras invertidas a uma string
         
         $sql = " SELECT * FROM usuarios WHERE nome = '".$user."' AND senha = '".$pass."' ";
-        $mysqli = new mysqli('localhost', 'root', '', 'partana');
+        $conn = new Conexao();
+        $mysqli = $conn->condb();
         $query = $mysqli->query($sql);
 
         $row = $query->fetch_array(MYSQLI_NUM);

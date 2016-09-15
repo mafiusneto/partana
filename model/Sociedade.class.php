@@ -1,4 +1,5 @@
 <?php
+require_once 'Conexao.class.php';
 
 class Sociedade {
     
@@ -41,7 +42,8 @@ class Sociedade {
         
         if(($cpf != NULL) AND ($cnpj != NULL) AND ($participacao != NULL)) {
             $sql = " INSERT INTO `participacao`(`socio`, `empresa`, `percentual`)VALUES ('$cpf','$cnpj','$participacao') ";
-            $mysqli = new mysqli('localhost', 'root', '', 'partana');
+            $conn = new Conexao();
+            $mysqli = $conn->condb();
             $mysqli->query($sql);
         }  
     }
@@ -49,7 +51,8 @@ class Sociedade {
     //Método Pesquisar
     public function listar(){
         $sql = " SELECT * FROM participacao ";
-        $mysqli = new mysqli('localhost', 'root', '', 'partana');
+        $conn = new Conexao();
+        $mysqli = $conn->condb();
         $query = $mysqli->query($sql) or die(mysqli_error($mysqli));
         $row = $query->fetch_all(MYSQLI_NUM)or die(mysqli_error($mysqli));
         $c = (count($row));

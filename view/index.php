@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-
+require_once '../model/Conexao.class.php';
 session_start("access");
 
 if ( (!isset($_SESSION['cod']) or !isset($_SESSION['nome']) or !isset($_SESSION['senha'])) or ($_SESSION['status'] == 1 ) ) {
@@ -13,15 +13,17 @@ if ( (!isset($_SESSION['cod']) or !isset($_SESSION['nome']) or !isset($_SESSION[
     $user_pass   = @$_SESSION['status'];
 
     $upst = " UPDATE `usuarios` SET `status` = '1' WHERE `cod` = $user_id ";
-    $x = new mysqli('localhost', 'root', '', 'partana');
-    $query = $x->query($upst) or die(mysqli_error($x));
+    $conn = new Conexao();
+    $mysqli = $conn->condb();
+    $query = $mysqli->query($upst) or die(mysqli_error($mysqli));
 }
 
 if (@$_GET['l'] == 'loggout') {
     $upst = " UPDATE `usuarios` SET `status` = 0 WHERE `cod` = $user_id ";
-    $x = new mysqli('localhost', 'root', '', 'partana');
-    $query = $x->query($upst);
-    mysqli_close($x) or die(mysqli_error($x));
+    $conn = new Conexao();
+    $mysqli = $conn->condb();
+    $query = $mysqli->query($upst);
+    mysqli_close($mysqli) or die(mysqli_error($mysqli));
     unset($_SESSION['email']);
     unset($_SESSION['pass']);
     session_destroy();

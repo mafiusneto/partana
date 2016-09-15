@@ -1,4 +1,6 @@
-<?php require_once '../model/socio.class.php'; ?>
+<?php
+
+require_once '../model/socio.class.php'; ?>
 <section id="content">
     
     <div class="separator">

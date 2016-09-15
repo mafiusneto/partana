@@ -1,6 +1,6 @@
 <?php
 require_once '../model/Sociedade.class.php';
-require_once '../model/connection.inc.php';
+require_once '../model/Conexao.class.php';
 ?>
 <section id="content">
   
