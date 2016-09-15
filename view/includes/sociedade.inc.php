@@ -1,24 +1,43 @@
-<?php require_once '../model/Sociedade.class.php'; ?>
+<?php
+require_once '../model/Sociedade.class.php';
+require_once '../model/connection.inc.php';
+?>
 <section id="content">
-    
-    <?php
-    
-    $pr = new Sociedade();
-    $pr->listar();
-    
-    ?>
-    
+  
     <div class="separator">
         <h1>Cadastro</h1>
         <form method="post" action="">
             <label for="socio">Selecione o Sócio</label>
-            <select name="socio">
-                <option value="trp">trompete</option>
+            <select name="cpf">
+                <?php
+                $sql = " SELECT * FROM socio ";
+                $query = $mysqli->query($sql) or die(mysqli_error($mysqli));
+                $row = $query->fetch_all(MYSQLI_NUM)or die(mysqli_error($mysqli));
+                $c = (count($row));
+                $i = 0;
+                while ($i<$c){
+                ?>
+                <option value="<?php echo $row[$i][0] ?>"><?php echo $row[$i][1] ?></option>
+                <?php
+                $i++;
+                }
+                ?>
             </select>
             <label for="socio">Selecione a Empresa</label>
-            <select name="empresa">
-                
-                <option value="trp">trompete</option>
+            <select name="rzsocial">
+                <?php
+                $sql = " SELECT * FROM empresa ";
+                $query = $mysqli->query($sql) or die(mysqli_error($mysqli));
+                $row = $query->fetch_all(MYSQLI_NUM)or die(mysqli_error($mysqli));
+                $c = (count($row));
+                $i = 0;
+                while ($i<$c){
+                ?>
+                <option value="<?php echo $row[$i][0] ?>"><?php echo $row[$i][1] ?></option>
+                <?php
+                $i++;
+                }
+                ?>
             </select>
             <input required type="number" name="percent" placeholder="Participação percentual">
             <input required required type="submit" name="cadastrar" value="Cadastrar">
@@ -28,48 +47,24 @@
            @$cadastrar = $_POST['cadastrar'];
             
             if(isset($cadastrar)){
-                $cnpj = $_POST['cnpj'];
-                $rzsocial = $_POST['rzsocial'];
-                $fantasia = $_POST['fantasia'];
+                $cpf = $_POST['cpf'];
+                $cnpj = $_POST['rzsocial'];
+                $participacao = $_POST['percent'];
             
-                $emp = new Empresa();
-                $emp->inserir($cnpj, $rzsocial, $fantasia);
+                $sc = new Sociedade();
+                $sc->inserir($cpf, $cnpj, $participacao);
             }
-        ?>
-        
+        ?>   
     </div>
     
+    
+    
     <div class="separator">
-        <h1>Listar por Sócio ou Empresa</h1>
-        <form method="post" action="">
-        <input required type="number" name="cnpj" placeholder="CNPJ">
-        <input required type="submit" name="buscar" value="Buscar">
-        </form>
+        <h1>Lista de Participações</h1>
         <?php
-           @$buscar = $_POST['buscar'];
+            $sc = new Sociedade();
+            $sc->listar();
             
-            if(isset($buscar)){
-                $cnpj = $_POST['cnpj'];
-            
-                $emp = new Empresa();
-                $emp->buscar($cnpj);
-                if ($emp->getTest() == true) {
-        ?>
-                <table>
-                    <tr>
-                        <td>CNPJ</td>
-                        <td>Razão Social</td>
-                        <td>Nome Fantasia</td>
-                    </tr>
-                    <tr>
-                        <td><?php echo $emp->getCnpj(); ?></td>
-                        <td><?php echo $emp->getRzsocial(); ?></td>
-                        <td><?php echo $emp->getFantasia(); ?></td>
-                    </tr>
-                </table>
-        <?php
-                }
-            }
         ?>
     </div>
         

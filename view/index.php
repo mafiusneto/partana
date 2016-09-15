@@ -17,11 +17,11 @@ if ( (!isset($_SESSION['cod']) or !isset($_SESSION['nome']) or !isset($_SESSION[
     $query = $x->query($upst) or die(mysqli_error($x));
 }
 
-if (@$_GET['act'] == 'loggout') {
-    $upst = " UPDATE `usuarios` SET `status` = 0 WHERE `id` = '".$user_id."' ";
+if (@$_GET['l'] == 'loggout') {
+    $upst = " UPDATE `usuarios` SET `status` = 0 WHERE `cod` = $user_id ";
     $x = new mysqli('localhost', 'root', '', 'partana');
     $query = $x->query($upst);
-
+    mysqli_close($x) or die(mysqli_error($x));
     unset($_SESSION['email']);
     unset($_SESSION['pass']);
     session_destroy();

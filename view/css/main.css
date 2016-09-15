@@ -3,14 +3,18 @@ main {
   height: 40px;
   background-color: #4694e0;
 }
-main ul:nth-child(1) {
-  height: 40px;
+main ul:last-child {
+  float: right;
 }
-main ul:nth-child(1) a {
+main ul {
+  height: 40px;
+  float: left;
+}
+main ul a {
   color: #fff;
   text-decoration: none;
 }
-main ul:nth-child(1) a li {
+main ul a li {
   list-style: none;
   display: table-cell;
   vertical-align: middle;
@@ -19,7 +23,7 @@ main ul:nth-child(1) a li {
   font-family: "Trebushet MS", arial;
   font-weight: bold;
 }
-main ul:nth-child(1) a li:hover {
+main ul a li:hover {
   background-color: #fff;
   color: #4694e0;
 }

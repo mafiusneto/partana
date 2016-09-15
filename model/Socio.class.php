@@ -1,4 +1,6 @@
 <?php
+include 'connection.inc.php';
+require 'connection.inc.php';
 
 class Socio {
     
